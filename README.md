@@ -60,32 +60,30 @@ Machine Learning Model Development:
 Program:
 
 import pandas as pd
-Load the dataset
- data =  pd.read_csv('air_quality_data.csv')
+ Load the dataset
+data = pd.read_csv('your_dataset.csv')  # Replace 'your_dataset.csv' with your actual dataset file
 
-Checking for missing values
- missing_values = data.isnull().sum()
-print("Missing Values:")
-print(missing_values)
+Handling missing values
+data.fillna(method='ffill', inplace=True)  # Forward-fill missing values
 
-Handling missing values (this is a simple example)
-    Replace missing values in SO2, NO2, and RSPM/PM10 columns with their means
- data['SO2'].fillna(data['SO2'].mean(), inplace=True)
-data['NO2'].fillna(data['NO2'].mean(), inplace=True)
-data['RSPM/PM10'].fillna(data['RSPM/PM10'].mean(), inplace=True)
+Removing duplicates if any
+data.drop_duplicates(inplace=True)
 
-Data normalization (scaling the data to a common range)
-from sklearn.preprocessing import MinMaxScaler
+Outlier detection and handling (assuming RSPM/PM10, SO2, NO2 are columns)
+def remove_outliers(df, column):
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    df = df[(df[column] > lower_bound) & (df[column] < upper_bound)]
+    return df
 
-scaler = MinMaxScaler()
-data[['SO2', 'NO2', 'RSPM/PM10']] = scaler.fit_transform(data[['SO2', 'NO2', 'RSPM/PM10']])
+data = remove_outliers(data, 'RSPM/PM10')
+data = remove_outliers(data, 'SO2')
+data = remove_outliers(data, 'NO2')
 
- Feature selection (in this example, all columns except 'Location' are used as features)
-features = data.drop('Location', axis=1)
+Format or preprocess data further if needed (e.g., date parsing, feature engineering)
 
- You can proceed with further analysis, visualization, or model development using the 'features' DataFrame
- 
- For example, performing exploratory data analysis, building predictive models, or generating visualizations.
-
-Save the preprocessed data to a new CSV file if needed
-data.to_csv('preprocessed_air_quality_data.csv', index=False)
+Save preprocessed data to a new CSV file
+data.to_csv('preprocessed_data.csv', index=False)
