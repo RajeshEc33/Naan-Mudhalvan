@@ -56,7 +56,36 @@ Machine Learning Model Development:
  Documentation:
 
  - Offering detailed documentation outlining problem statements, design thinking approach, dataset description, preprocessing steps, model selection, and innovative techniques applied during the development.
-  
-Readme File and Dataset Source:
 
- - Including instructions for running the code, dependencies, and sharing the dataset source with a brief description.
+Program 
+ import pandas as pd 
+
+Load the dataset
+ data =  pd.read_csv('air_quality_data.csv')
+
+Checking for missing values
+ missing_values = data.isnull().sum()
+print("Missing Values:")
+print(missing_values)
+
+Handling missing values (this is a simple example)
+    Replace missing values in SO2, NO2, and RSPM/PM10 columns with their means
+ data['SO2'].fillna(data['SO2'].mean(), inplace=True)
+data['NO2'].fillna(data['NO2'].mean(), inplace=True)
+data['RSPM/PM10'].fillna(data['RSPM/PM10'].mean(), inplace=True)
+
+Data normalization (scaling the data to a common range)
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+data[['SO2', 'NO2', 'RSPM/PM10']] = scaler.fit_transform(data[['SO2', 'NO2', 'RSPM/PM10']])
+
+ Feature selection (in this example, all columns except 'Location' are used as features)
+features = data.drop('Location', axis=1)
+
+ You can proceed with further analysis, visualization, or model development using the 'features' DataFrame
+ 
+ For example, performing exploratory data analysis, building predictive models, or generating visualizations.
+
+Save the preprocessed data to a new CSV file if needed
+data.to_csv('preprocessed_air_quality_data.csv', index=False)
