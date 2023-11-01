@@ -1,4 +1,5 @@
-Drive link-phase1 
+
+pDrive link-phase1 
 
 https://drive.google.com/file/d/1Ns1gpjVcUDZr0n5H2rYNjwAW4GHRIndY/view?usp=drivesd# 
 
@@ -64,9 +65,14 @@ import matplotlib.pyplot as plt
  Load the dataset
 data = pd.read_csv('air_quality_data.csv')
 Basic statistics and information about the dataset
-print(data.head())  # Display the first few rows
-print(data.describe())  # Summary statistics of numerical columns
-print(data.info())  # Information about the dataset
+print(data.head()) 
+
+Display the first few rows
+print(data.describe())
+
+Summary statistics of numerical columns
+print(data.info())  
+Information about the dataset
 
  Visualizations for exploratory analysis
 Example: Plotting histograms for air quality parameters
@@ -75,9 +81,13 @@ plt.suptitle('Air Quality Parameters Histograms')
 plt.show()
 
 Example: Line plot to visualize trends over time (if time-related column is present)
-if 'Date' in data.columns:  # Change 'Date' to the actual column name containing the date
-    data['Date'] = pd.to_datetime(data['Date'])  # Convert 'Date' to datetime if not already
-    data.set_index('Date', inplace=True)  # Set 'Date' as index for time-series visualization
+if 'Date' in data.columns:
+
+Change'Date' to the actual column name containing the date
+    data['Date'] = pd.to_datetime(data['Date'])
+    Convert 'Date' to datetime if not already
+    data.set_index('Date', inplace=True) 
+    Set 'Date' as index for time-series visualization
     data.plot(figsize=(12, 6))
     plt.title('Air Quality Trends Over Time')
     plt.xlabel('Date')
@@ -98,7 +108,7 @@ plt.yticks(ticks=range(len(correlation_matrix.columns)), labels=correlation_matr
 plt.show()
 import pandas as pd
  Load the dataset
-data = pd.read_csv('your_dataset.csv')  # Replace 'your_dataset.csv' with your actual dataset file
+data = pd.read_csv('your_dataset.csv')   Replace 'your_dataset.csv' with your actual dataset file
 
 Handling missing values
 data.fillna(method='ffill', inplace=True)  # Forward-fill missing values
