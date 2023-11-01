@@ -57,9 +57,9 @@ Machine Learning Model Development:
 
  - Offering detailed documentation outlining problem statements, design thinking approach, dataset description, preprocessing steps, model selection, and innovative techniques applied during the development.
 
-Program 
- import pandas as pd 
+Program:
 
+-import pandas as pd
 Load the dataset
  data =  pd.read_csv('air_quality_data.csv')
 
