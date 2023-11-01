@@ -59,7 +59,7 @@ Machine Learning Model Development:
 
 Program:
 
--import pandas as pd
+import pandas as pd
 Load the dataset
  data =  pd.read_csv('air_quality_data.csv')
 
