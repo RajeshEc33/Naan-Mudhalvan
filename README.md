@@ -111,7 +111,8 @@ import pandas as pd
 data = pd.read_csv('your_dataset.csv')   Replace 'your_dataset.csv' with your actual dataset file
 
 Handling missing values
-data.fillna(method='ffill', inplace=True)  # Forward-fill missing values
+data.fillna(method='ffill', inplace=True)  
+Forward-fill missing values
 
 Removing duplicates if any
 data.drop_duplicates(inplace=True)
