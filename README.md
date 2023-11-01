@@ -60,6 +60,43 @@ Machine Learning Model Development:
 Program:
 
 import pandas as pd
+import matplotlib.pyplot as plt
+ Load the dataset
+data = pd.read_csv('air_quality_data.csv')
+Basic statistics and information about the dataset
+print(data.head())  # Display the first few rows
+print(data.describe())  # Summary statistics of numerical columns
+print(data.info())  # Information about the dataset
+
+ Visualizations for exploratory analysis
+Example: Plotting histograms for air quality parameters
+data.hist(bins=20, figsize=(12, 10))
+plt.suptitle('Air Quality Parameters Histograms')
+plt.show()
+
+Example: Line plot to visualize trends over time (if time-related column is present)
+if 'Date' in data.columns:  # Change 'Date' to the actual column name containing the date
+    data['Date'] = pd.to_datetime(data['Date'])  # Convert 'Date' to datetime if not already
+    data.set_index('Date', inplace=True)  # Set 'Date' as index for time-series visualization
+    data.plot(figsize=(12, 6))
+    plt.title('Air Quality Trends Over Time')
+    plt.xlabel('Date')
+    plt.ylabel('Air Quality Parameter Values')
+    plt.legend(loc='best')
+    plt.show()
+else:
+    print("Date column not found for time-series visualization.")
+
+ Correlation matrix heatmap
+correlation_matrix = data.corr()
+plt.figure(figsize=(10, 8))
+plt.title('Correlation Heatmap')
+plt.imshow(correlation_matrix, cmap='coolwarm', interpolation='nearest')
+plt.colorbar()
+plt.xticks(ticks=range(len(correlation_matrix.columns)), labels=correlation_matrix.columns, rotation=90)
+plt.yticks(ticks=range(len(correlation_matrix.columns)), labels=correlation_matrix.columns)
+plt.show()
+import pandas as pd
  Load the dataset
 data = pd.read_csv('your_dataset.csv')  # Replace 'your_dataset.csv' with your actual dataset file
 
